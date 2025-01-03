@@ -1,0 +1,101 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            {{#if persona}}
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8 text-center">
+                                <form class="d-flex" action="/administrator/users/search" method="GET">
+                                    <input class="form-control me-2" type="search" name="buscar"
+                                        placeholder="Buscar Usuario" aria-label="Search">
+                                    <button class="btn btn-outline-success " type="submit">Buscar</button>
+                                </form>
+                            </div>
+                            <table class="table caption-top">
+                                <caption>Lista de Usuarios Inactivos</caption>
+                                <thead class="text-center table-dark">
+                                    <tr class="card-title text-uppercase">
+                                        <td>Nombre</td>
+                                        <td>Telefono</td>
+                                        <td>Direccion</td>
+                                        <td>Email</td>
+                                        <td>Estado</td>
+                                        <td>Acciones</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    {{#each persona}}
+                                    <tr>
+                                        <form action="/administrator/users/edit" method="POST">
+                                            <td>{{PERSONA_NOMBRE}}</td>
+                                            <td>{{PERSONA_TELEFONO}}</td>
+                                            <td>{{PARROQUIA}}</td>
+                                            <td>{{PERSONA_EMAIL}}</td>
+                                            <td><input type="text" value="{{PERSONA_ESTADO}}" name="PERSONA_ESTADO"
+                                                    required></td>
+                                            <td>
+                                                <a href="/administrator/delete/{{PERSONA_ID}}"
+                                                    class="btn btn-danger">Eliminar</a>
+                                                <input type="hidden" name="PERSONA_ID" value="{{PERSONA_ID}}">
+                                                <button type="submit" class="btn btn-primary">Modificar</button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            {{else}}
+                            <div class="col-md-4 mx-auto">
+                                <div class="card card-body text-center">
+                                    <p>Usuario no Encontrado
+                                        <a href="/administrator/users" class="btn btn-primary">
+                                            Regresar
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Acciones</h3>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="mb-3">
+                </div>
+
+                <div class="d-grid gap-3">
+                    <a href="/administrator/products" class="btn btn-outline-success"> Productos<i
+                            class="fal fa-shopping-cart"></i></a>
+                    <a href="/administrator/category" class="btn btn-outline-primary"><i class="fal fa-list">
+                            Categorias</i></a>
+                    <a href="/administrator/measurements" class="btn btn-outline-info"><i class="far fa-ruler"> Unidad
+                            Medida</i></a>
+                </div>
+                <div class="mb-3">
+                </div>
+                {{!-- <form action="#" method="POST"> --}}
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn btn-outline-danger"><i class="far fa-window-close"></i>
+                            Eliminar Todos los Usuarios</button>
+                    </div>
+                    {{!--
+                </form> --}}
+            </div>
+        </div>
+
+    </div>
+</div>

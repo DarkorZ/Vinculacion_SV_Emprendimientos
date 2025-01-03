@@ -1,0 +1,92 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-md-7">
+            <div class="thumbnail row text-center">
+                <table class="table caption-top">
+                    <caption>Lista de Unidades de Medida</caption>
+                    <thead class="text-center table-secondary">
+                        <tr class="card-title text-uppercase">
+                            <td>N°</td>
+                            <td>Nombre</td>
+                            <td>Descripcion</td>
+                            <td>Modificar</td>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {{#each category}}
+                        <tr>
+                            <form action="/administrator/category/edit" method="POST">
+                                <td>{{CATEGORIA_ID}}</td>
+                                <td>
+                                    <input type="text" value="{{CATEGORIA_NOMBRE}}" name="CATEGORIA_NOMBRE" required>
+                                </td>
+                                <td>
+                                    <textarea name="CATEGORIA_DESCRIPCION" rows="2" class="form-control"
+                                        placeholder="Description" required>{{CATEGORIA_DESCRIPCION}}</textarea>
+                                </td>
+                                <td>
+                                    <input type="hidden" name="CATEGORIA_ID" value="{{CATEGORIA_ID}}">
+                                    <button type="submit" class="btn btn-primary">Modificar</button>
+                                </td>
+                            </form>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-dark mb-3">
+                <div class="card-header text-center card-title">
+                    <h5>Agregar Categoria</h5>
+                </div>
+                <div class="card-body text-dark">
+                    <form action="/administrator/category" method="POST" class="row g-3 needs-validation"
+                        enctype="multipart/form-data">
+                        <p>
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" name="CATEGORIA_NOMBRE" class="form-control" placeholder="Nombre"
+                                required autofocus>
+                        </p>
+
+                        <p>
+                            <label class="form-label">Descripción:</label>
+                            <textarea name="CATEGORIA_DESCRIPCION" rows="2" class="form-control"
+                                placeholder="Descripción" required></textarea>
+                        </p>
+
+                        <div class="text-center">
+                            <button class="btn btn-success">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="thumbnail row text-center" style="min-height:260px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h3 class="panel-title">Acciones</h3>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="d-grid gap-3">
+                        <a href="/administrator/users" class="btn btn-outline-success"><i
+                                class="fal fa-user">Usuarios</i>
+                        </a>
+                        <a href="/administrator/products" class="btn btn-outline-warning"><i
+                                class="fal fa-shopping-cart">Productos</i>
+                        </a>
+                        <a href="/administrator/presentation" class="btn btn-outline-primary"><i
+                                class="fal fa-sack"></i>Presentación</a>
+                        <a href="/administrator/measurements" class="btn btn-outline-secondary"><i class="far fa-ruler">
+                                Unidad
+                                Medida</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

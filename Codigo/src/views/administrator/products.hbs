@@ -1,0 +1,90 @@
+<div class="container p-4">
+    <div class="row">
+        {{#if products}}
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            {{!-- <div class="mx-auto"> --}}
+
+                                <table class="table caption-top">
+                                    <caption>Lista de Productos Caducados</caption>
+                                    <thead class="text-center table-dark">
+                                        <tr class="card-title text-uppercase">
+                                            <td>Nombre</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Caducidad</td>
+                                            <td>Dueño</td>
+                                            <td>Ubicación</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        {{#each products}}
+                                        <tr>
+                                            <td>{{PRODUCTO_NOMBRE}}</td>
+                                            <td>{{PRODUCTO_PRECIO}}</td>
+                                            <td>{{PRODUCTO_CANTIDAD}}</td>
+                                            <td>{{PRODUCTO_FECHALIMITE}}</td>
+                                            <td>{{PERSONA_NOMBRE}}</td>
+                                            <td>{{PARROQUIA}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                                {{!--
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Acciones</h3>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="mb-3">
+                </div>
+
+                <div class="d-grid gap-3">
+                    <a href="/administrator/users" class="btn btn-outline-success"><i class="fal fa-user"> Usuarios</i>
+                    </a>
+                    <a href="/administrator/category" class="btn btn-outline-primary"><i class="fal fa-list">
+                            Categorias</i></a>
+                    <a href="/administrator/measurements" class="btn btn-outline-info"><i class="far fa-ruler"> Unidad
+                            Medida</i></a>
+                </div>
+                <div class="mb-3">
+                </div>
+                {{!-- <form action="#" method="POST"> --}}
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn btn-outline-danger"><i class="far fa-window-close"></i>
+                            Eliminar Todos los Productos</button>
+                    </div>
+                    {{!--
+                </form> --}}
+            </div>
+        </div>
+        {{else}}
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3>No Existe Productos Caducados</h3>
+                        <a href="#" class="btn btn-primary m-4">
+                            Ver Usuarios Inactivos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

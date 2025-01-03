@@ -1,0 +1,79 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="thumbnail row text-center">
+                <table class="table caption-top">
+                    <caption>Lista de Unidades de Medida</caption>
+                    <thead class="text-center table-secondary">
+                        <tr class="card-title text-uppercase">
+                            <td>N°</td>
+                            <td>Nombre</td>
+                            <td>Modificar</td>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {{#each measure}}
+                        <tr>
+                            <form action="/administrator/measurements/edit" method="POST">
+                                <td>{{MEDIDA_ID}}</td>
+                                <td>
+                                    <input type="text" value="{{MEDIDA_NOMBRE}}" name="MEDIDA_NOMBRE" required>
+                                </td>
+                                <td>
+                                    <input type="hidden" name="MEDIDA_ID" value="{{MEDIDA_ID}}">
+                                    <button type="submit" class="btn btn-primary">Modificar</button>
+                                </td>
+                            </form>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-dark mb-3">
+                <div class="card-header text-center card-title">
+                    <h5>Agregar Medida</h5>
+                </div>
+                <div class="card-body text-dark">
+                    <form action="/administrator/measurements" method="POST" class="row g-3 needs-validation"
+                        enctype="multipart/form-data">
+                        <p>
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" name="MEDIDA_NOMBRE" class="form-control" placeholder="Nombre"
+                                required autofocus>
+                        </p>
+
+                        <div class="text-center">
+                            <button class="btn btn-success">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail row text-center" style="min-height:260px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h3 class="panel-title">Acciones</h3>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="d-grid gap-3">
+                        <a href="/administrator/users" class="btn btn-outline-success"><i
+                                class="fal fa-user">Usuarios</i>
+                        </a>
+                        <a href="/administrator/products" class="btn btn-outline-warning"><i
+                                class="fal fa-shopping-cart">Productos</i>
+                        </a>
+                        <a href="/administrator/presentation" class="btn btn-outline-primary"><i class="fal fa-sack"></i>Presentación</a>
+                        <a href="/administrator/category" class="btn btn-outline-secondary"><i class="fal fa-list">
+                                Categoria</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

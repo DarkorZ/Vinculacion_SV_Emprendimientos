@@ -1,0 +1,35 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card text-center">
+                <div class="card-body">
+                    {{#if detail}}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Detalle</th>
+                                <th scope="col">Ver Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each detail}}
+                            <tr>
+                                <td>{{@index}}) Pre-Factura del: {{VENTA_FECHA}} </td>
+                                <td>
+                                    <a href="/detail/pdf/{{VENTA_ID}}" class="btn btn-success">Descargar</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    {{else}}
+                    <h3>Usted no tiene compras realizadas</h3>
+                    <a href="/products" class="btn btn-primary m-4">
+                        Regresar
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

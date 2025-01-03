@@ -1,0 +1,73 @@
+<div class="sticky-top">
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase">
+        <div class="container">
+            <a class="navbar-brand" href="/">Productos</a>
+          
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex" action="/shop/search" method="GET" style="display: flex; justify-content: center;">
+                    <div style="position: relative; width: 400px;">
+                        <input class="form-control me-2" type="search" name="buscar" placeholder="Buscar" aria-label="Search" maxlength="50" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                        <button type="submit" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); background: none; border: none; padding: 0;">
+                            <img src="/img/lupa.png" alt="Buscar" style="width: 20px; height: 20px;">
+                        </button>
+                    </div>
+                </form>
+                <ul class="navbar-nav ms-auto flex-wrap align-items-center">{{!-- me-auto (right) -- ms-auto (left) --}}
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/"><i class="fal fa-home-alt"></i> Inicio</a>
+                    </li>
+            
+                    {{#if user}}
+
+                    <li class="nav-item">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="/cart"><i class="fas fa-shopping-cart"></i> Carrito</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Productos
+                        </a>
+                        <ul class="dropdown-menu" >
+                            <li><a class="dropdown-item" href="/products"><i class="fal fa-universal-access">Visualisar</i>
+                                </a></li>
+                            <li><a class="dropdown-item" href="/products/add"><i class="fal fa-shopping-basket">Vender</i>
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="/shop"><i class="fal fa-cart-arrow-down">Comprar</i></a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                             <li><a class="dropdown-item" href="/administrator/users"><i class="fal fa-cart-arrow-down">Administrar</i></a>
+
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Detalle
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/detail/buy"><i class="fal fa-clipboard-list"> Compra</i></a>
+                            </li>
+                            <li><a class="dropdown-item" href="/detail/sell"><i class="fal fa-clipboard-list-check"></i>
+                                        Venta</i></a></li>
+                        </ul>
+                    </li>
+                      <li><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout"><i class="fal fa-home-alt"></i> Salir</a></li>
+                    {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop">Comprar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signin">Ingresar</a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,164 @@
+<div class="container-fluid p-5">
+    <div class="row">
+        {{#if products}}
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="mx-auto">
+
+                                <table class="table caption-top">
+                                    <caption>Lista de Productos Agregados al Carrito</caption>
+                                    <thead class="text-center table-secondary">
+                                        <tr class="card-title text-uppercase">
+                                            <td>Nombre</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Presentación</td>
+                                            <td>Caducidad</td>
+                                            <td>Productor</td>
+                                            <td>Ubicación</td>
+                                            <td>Eliminar</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        {{#each products}}
+                                        <tr>
+                                            <td>{{PRODUCTO_NOMBRE}}</td>
+                                            <td>{{PRECIO_UNITARIO}}</td>
+                                            <td class="">
+                                                <div class="btn-group" role="group"
+                                                    aria-label="Basic mixed styles example">
+
+                                                    <form action="/cart/min" method="POST">
+                                                        <input type="hidden" name="PRODUCTO_ID" value="{{PRODUCTO_ID}}">
+                                                        <button type="submit" class="btn btn-danger">-</button>
+                                                    </form>
+
+                                                    <input type="text" class="text-center" name="PRODUCTO_CANTIDAD"
+                                                        value="{{PRODUCTO_CANTIDAD}}" readonly>
+
+                                                    <form action="/cart/max" method="POST">
+                                                        <input type="hidden" name="PRODUCTO_ID" value="{{PRODUCTO_ID}}">
+                                                        <button type="submit" class="btn btn-success">+</button>
+                                                    </form>
+
+                                                </div>
+                                            </td>
+                                            <td>{{PRESENTACION_NOMBRE}}</td>
+                                            <td>{{PRODUCTO_FECHALIMITE}}</td>
+                                            <td>{{PERSONA_NOMBRE}}</td>
+                                            <td>{{DIRECCION}}</td>
+                                            <td>
+                                                <form action="/cart" method="POST">
+                                                    <input type="hidden" name="PRODUCTO_ID" value="{{PRODUCTO_ID}}">
+                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                    <tfoot class="text-center">
+                                        <td>TOTAL: </td>
+                                        <td class="table-success text-center">
+                                            {{totalPrice}}
+                                        </td>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="panel panel-default">
+                <div class="card">
+                    <div class="card-header text-uppercase text-center">
+                        Tipo de Pago
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="PAGO_ID" id="flexRadioDefault1" value="1"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault1"><i
+                                    class="far fa-money-bill-wave"></i>
+                                Efectivo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="PAGO_ID" id="flexRadioDefault2"
+                                value="2">
+                            <label class="form-check-label" for="flexRadioDefault2"><i
+                                    class="fas fa-money-check-edit-alt"></i> Deposito
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel panel-default">
+                <div class="mb-3">
+                </div>
+
+                <form action="/cart/buy" method="POST">
+                    <div class="d-grid gap-3">
+                        <input type="hidden" name="PAGO_ID" id="tipoPago" value="">
+                        <button type="submit" class="btn btn-outline-success"><i class="fal fa-shopping-cart"></i>
+                            Comprar</button>
+                    </div>
+                </form>
+                <div class="mb-3">
+                </div>
+                <form action="/cart/delete" method="POST">
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn btn-outline-danger"><i class="far fa-window-close"></i>
+                            Cancelar Pedido</button>
+                    </div>
+                </form>
+                <div class="mb-3">
+                </div>
+                <div class="d-grid gap-3">
+                    <a href="/shop" class="btn btn-outline-primary" type="submit">Seguir Comprando</a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3>Usted no tiene productos agregados al carrito</h3>
+                        <a href="/shop" class="btn btn-primary m-4">
+                            Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<script>
+    var efectivo = document.getElementById('flexRadioDefault1');
+    var deposito = document.getElementById('flexRadioDefault2');
+
+    efectivo.addEventListener("change", efectivoId);
+    deposito.addEventListener("change", depositoId);
+
+    function efectivoId() {
+        console.log('1');
+        document.getElementById("tipoPago").value = '1';
+    }
+
+    function depositoId() {
+        console.log('2');
+        document.getElementById("tipoPago").value = '2';
+    }
+
+</script>

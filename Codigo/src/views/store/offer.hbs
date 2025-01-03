@@ -1,0 +1,291 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Buscar por Sector
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label class="form-label">Provincia:</label>
+                                </div>
+                                <div class="form-label">
+                                    <select id="provincia" class="form-select" aria-label="Default select example">
+                                        <option value="0" selected>Seleccione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label class="form-label">Canton:</label>
+                                </div>
+                                <div class="form-label">
+                                    <select id="canton" class="form-select" aria-label="Default select example">
+                                        <option value="0" selected>Selecccione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label class="form-label">Parroquia:</label>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <form action="/shop/place" method="GET">{{!-- cambio en la ruta --}}
+                                        <div class="form-label">
+                                            <select id="parroquia" name="DIRECCION_ID" class="form-select"
+                                                aria-label="Default select example">
+                                                <option value="0" selected>Selecccione</option>
+                                            </select>
+                                        </div>
+                                        <div class="d-grid gap-3">
+                                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Buscar por Categoria
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <form action="/shop/category" method="GET">{{!-- cambio en la ruta --}}
+                                        <div class="form-label">
+                                            <select id="parroquia" name="CATEGORIA_ID" class="form-select"
+                                                aria-label="Default select example">
+                                                <option value="0" selected>Selecccione</option>
+                                                {{#each category}}
+                                                <option value="{{CATEGORIA_ID}}">{{CATEGORIA_NOMBRE}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="d-grid gap-3">
+                                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                            aria-controls="flush-collapseThree">
+                            Buscar Promociones
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="d-grid gap-3">
+                                <a href="/shop/offer" class="btn btn-outline-success" type="submit">Buscar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            {{#each offer}}
+                            <div class="col-md-3">
+                                <div class="card mb-4 shadow-sm">
+
+                                    <div class="card-body">
+                                        <h3 class="card-title text-uppercase text-center">
+                                            {{PRODUCTO_NOMBRE}}
+                                        </h3>
+                                        <img src="{{PRODUCTO_URL}}" class="card-img-top" width="90px" height="150px">
+                                        <p class="m-2">Precio: $ {{PRODUCTO_PRECIO}}</p>
+                                        <p class="m-2">Cantidad: {{PRODUCTO_CANTIDAD}}</p>
+                                        <p class="m-2">Dirección: {{PARROQUIA}}</p>
+
+                                        {{!-- --}}
+                                        <!-- Button trigger modal -->
+                                        <div class="d-grid gap-3">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#myModal{{@index}}">
+                                                Ver Producto
+                                            </button>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal{{@index}}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                            {{PRODUCTO_NOMBRE}}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <img src="{{PRODUCTO_URL}}" class="card-img-top"
+                                                            alt="Card image cap">
+                                                        <p class="m-2">Precio: $ {{PRODUCTO_PRECIO}}</p>
+                                                        <p class="m-2">Cantidad: {{PRODUCTO_CANTIDAD}}</p>
+                                                        <p class="m-2">Medida: {{MEDIDA_NOMBRE}}</p>
+                                                        <p class="m-2">Peso: {{PRODUCTO_MEDIDA}}</p>
+                                                        <p class="m-2">Descripción:</p>
+                                                        <textarea rows="2" class="form-control"
+                                                            readonly>{{PRODUCTO_DESCRIPCION}}</textarea>
+                                                        {{!-- Aqui toca cambiar para que no se vea en todo --}}
+                                                        <p class="m-2">Oferta:</p>
+                                                        <textarea rows="2" class="form-control"
+                                                            readonly>{{OFERTA_DESCRIPCION}}</textarea>
+                                                        {{!-- ---------------------- --}}
+                                                        <p class="m-2">Dirección: {{PARROQUIA}}</p>
+                                                        <p class="m-2">Caduca: {{timeago PRODUCTO_FECHALIMITE}}</p>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger"
+                                                            data-bs-dismiss="modal">Cerrar</button>
+                                                        <form action="/shop" method="POST">
+                                                            <input type="hidden" name="PRODUCTO_ID"
+                                                                value="{{PRODUCTO_ID}}">
+                                                            <button type="submit"
+                                                                class="btn btn-block btn-success">Comprar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- --}}
+
+                                    </div>
+                                </div>
+                            </div>
+                            {{else}}
+                            <div class="col-md-4 mx-auto">
+                                <div class="card card-body text-center">
+                                    <p>Producto no Encontrado</p>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    fetch('/direction')
+        .then(res => res.json())
+        .then(data => {
+
+            let provincias = [];
+
+            var cantones = [
+                {
+                    provincia: '',
+                    canton: ''
+                }
+            ];
+
+            var parroquias = [
+                {
+                    id: '',
+                    canton: '',
+                    parroquia: ''
+                }
+            ];
+
+            const direction = '';
+
+            data.direction.forEach(places => {
+                provincias.push(places.PROVINCIA);
+                cantones.push({ provincia: places.PROVINCIA, canton: places.CANTON });
+                parroquias.push({ id: places.DIRECCION_ID, canton: places.CANTON, parroquia: places.PARROQUIA });
+            });
+
+            // for (let i of cantones) {
+            //     console.log('canton: ' + i.canton);
+            // }
+
+            let unicosProvincias = Array.from(new Set(provincias));
+
+            // console.log('provincias: ' + unicosProvincias);
+
+            let hash = {};
+            cantones = cantones.filter(o => hash[o.canton] ? false : hash[o.canton] = true);
+            // console.log(JSON.stringify(cantones));
+
+            //creando los options de area
+            var areasSelect = document.getElementById('provincia');
+            var categoriasSelect = document.getElementById('canton');
+            var subCategoriasSelect = document.getElementById('parroquia');
+
+            areasSelect.addEventListener("change", cargarCategorias);
+            categoriasSelect.addEventListener("change", cargarSubCategorias);
+
+            unicosProvincias.forEach(function (unicosProvincia) {
+                let opcion = document.createElement('option')
+                opcion.value = unicosProvincia
+                opcion.text = unicosProvincia
+                areasSelect.add(opcion)
+            })
+
+            function cargarCategorias() {
+                categoriasSelect.options.length = 1;
+                subCategoriasSelect.options.length = 1;
+                cantones
+                    .filter(function (canton) {
+                        return canton.provincia == this;
+                    }, areasSelect.value)
+                    .forEach(function (canton) {
+                        let opcion = document.createElement('option')
+                        opcion.value = canton.canton
+                        opcion.text = canton.canton
+                        categoriasSelect.add(opcion);
+                    });
+            }
+
+            function cargarSubCategorias() {
+                subCategoriasSelect.options.length = 1;
+                parroquias
+                    .filter(function (parroquia) {
+                        return parroquia.canton == this;
+                    }, categoriasSelect.value)
+                    .forEach(function (parroquia) {
+                        let opcion = document.createElement('option')
+                        opcion.value = parroquia.id
+                        opcion.text = parroquia.parroquia
+                        subCategoriasSelect.add(opcion);
+                    });
+            }
+
+        });
+
+</script>

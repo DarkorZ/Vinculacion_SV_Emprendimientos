@@ -1,0 +1,40 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            {{#if productStock}}
+            <table class="table">
+                <thead class="text-center table-secondary">
+                    <tr class="card-title text-uppercase">
+                        <td>Nombre</td>
+                        <td>Cantidad que desea Comprar</td>
+                        <td>Cantidad Actual en Stock</td>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    {{#each productStock}}
+                    <td>{{PRODUCTO_NOMBRE}}</td>
+                    <td>{{CANTIDAD_ACTUAL}}</td>
+                    <td class="table-danger">{{PRODUCTO_CANTIDAD}}</td>                    
+                    {{/each}}
+                </tbody>
+            </table>
+            <a href="/cart" class="text-center btn btn-primary m-4">
+                Regresar al Carrito
+            </a>
+            {{else}}
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3>No existe problemas con la compra</h3>
+                            <a href="/shop" class="btn btn-primary m-4">
+                                Comprar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

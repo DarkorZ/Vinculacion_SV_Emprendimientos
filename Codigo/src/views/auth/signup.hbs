@@ -1,0 +1,183 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <div class="panel-heading text-center">
+                        <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                            <a href="/signin">Ingresar</a>
+                        </div>
+                        <h3>
+                            <div class="panel-title">Registrarse</div>
+                        </h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="/signup" class="row g-3 needs-validation" method="POST" enctype="multipart/form-data">
+
+                        <div class="col-md-8">
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" name="PERSONA_NOMBRE" placeholder="Nombre" class="form-control" maxlength="60" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required autofocus>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Telefono:</label>
+                            <input type="number" name="PERSONA_TELEFONO" placeholder="Telefono" class="form-control" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Correo:</label>
+                            <input type="email" name="PERSONA_EMAIL" class="form-control" placeholder="Correo" maxlength="60" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Contraseña:</label>
+                            <input type="password" name="PERSONA_CONTRASENA" placeholder="Contraseña" class="form-control" maxlength="60" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Provincia:</label>
+                            <div class="form-label">
+                                <select id="provincia" class="form-select" aria-label="Default select example" required>
+                                    <option value="0" selected>Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Canton:</label>
+                            <div class="form-label">
+                                <select id="canton" class="form-select" aria-label="Default select example" required>
+                                    <option value="0" selected>Selecccione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Parroquia:</label>
+                            <div class="form-label">
+                                <select id="parroquia" name="DIRECCION_ID" class="form-select"
+                                    aria-label="Default select example" required>
+                                    <option value="0" selected>Selecccione</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="form-label">Imagen:</label>
+                            <input type="file" accept="image/*" name="SUBIR_IMAGEN" class="form-control"
+                                onchange="loadFile(event)">
+                        </div>
+
+                     
+
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary">
+                                Aceptar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var loadFile = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+
+    fetch('/direction')
+        .then(res => res.json())
+        .then(data => {
+
+            let provincias = [];
+
+            var cantones = [
+                {
+                    provincia: '',
+                    canton: ''
+                }
+            ];
+
+            var parroquias = [
+                {
+                    id: '',
+                    canton: '',
+                    parroquia: ''
+                }
+            ];
+
+            const direction = '';
+
+            data.direction.forEach(places => {
+                provincias.push(places.PROVINCIA);
+                cantones.push({ provincia: places.PROVINCIA, canton: places.CANTON });
+                parroquias.push({ id: places.DIRECCION_ID, canton: places.CANTON, parroquia: places.PARROQUIA });
+            });
+
+            // for (let i of cantones) {
+            //     console.log('canton: ' + i.canton);
+            // }
+
+            let unicosProvincias = Array.from(new Set(provincias));
+
+            // console.log('provincias: ' + unicosProvincias);
+
+            let hash = {};
+            cantones = cantones.filter(o => hash[o.canton] ? false : hash[o.canton] = true);
+            // console.log(JSON.stringify(cantones));
+
+            //creando los options de area
+            var areasSelect = document.getElementById('provincia');
+            var categoriasSelect = document.getElementById('canton');
+            var subCategoriasSelect = document.getElementById('parroquia');
+
+            areasSelect.addEventListener("change", cargarCategorias);
+            categoriasSelect.addEventListener("change", cargarSubCategorias);
+
+            unicosProvincias.forEach(function (unicosProvincia) {
+                let opcion = document.createElement('option')
+                opcion.value = unicosProvincia
+                opcion.text = unicosProvincia
+                areasSelect.add(opcion)
+            })
+
+            function cargarCategorias() {
+                categoriasSelect.options.length = 1;
+                subCategoriasSelect.options.length = 1;
+                cantones
+                    .filter(function (canton) {
+                        return canton.provincia == this;
+                    }, areasSelect.value)
+                    .forEach(function (canton) {
+                        let opcion = document.createElement('option')
+                        opcion.value = canton.canton
+                        opcion.text = canton.canton
+                        categoriasSelect.add(opcion);
+                    });
+            }
+
+            function cargarSubCategorias() {
+                subCategoriasSelect.options.length = 1;
+                parroquias
+                    .filter(function (parroquia) {
+                        return parroquia.canton == this;
+                    }, categoriasSelect.value)
+                    .forEach(function (parroquia) {
+                        let opcion = document.createElement('option')
+                        opcion.value = parroquia.id
+                        opcion.text = parroquia.parroquia
+                        subCategoriasSelect.add(opcion);
+                    });
+            }
+
+        });
+
+</script>

@@ -1,0 +1,27 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 order-md-2"> <!-- Columna para el formulario (orden invertido en pantallas medianas y grandes) -->
+            <form action="/signin" method="POST" class="d-flex flex-column h-100 justify-content-center"> 
+                <h3 class="text-center mb-4">Ingreso</h3>
+                <div class="mb-3">
+                    <input type="email" name="email" placeholder="Correo" class="form-control" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password" placeholder="Contraseña" class="form-control" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary">Aceptar</button>
+                </div>
+                <div class="mb-3">
+                    <div class="col-md-12 control">
+                        ¿No tienes una cuenta?
+                        <a href="/signup" style="color: #2ECC71;">Regístrate Aquí</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 order-md-1"> <!-- Columna para la imagen (orden invertido en pantallas medianas y grandes) -->
+            <img src="/img/icono.png" alt="Logo Empresa" class="mx-auto d-block rounded-circle img-fluid" style="max-width: 70%;"> <!-- Hacer la imagen responsive con clase 'img-fluid' y establecer un ancho máximo -->
+        </div>
+    </div>
+</div>

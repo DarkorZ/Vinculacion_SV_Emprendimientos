@@ -1,0 +1,182 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 mx-auto">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="panel-heading text-center">
+                                            <h3>
+                                                <div class="panel-title">Modificar Producto</div>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                   
+                                        <form action="/products/edit/{{productId.PRODUCTO_ID}}" method="POST"
+                                            enctype="multipart/form-data" class="row g-3 needs-validation">
+
+                                            <div class="col-md-4">
+                                                <label class="form-label">Nombre:</label>
+                                                <input type="text" value="{{product.PRODUCTO_NOMBRE}}"
+                                                    name="PRODUCTO_NOMBRE" class="form-control" placeholder="Nombre" maxlength="60" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                    required autofocus>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="form-label">Categoria:</label>
+                                                <div class="form-label">
+                                                    <select name="CATEGORIA_ID" class="form-control" required>
+                                                        <option value="{{product.CATEGORIA_ID}}">
+                                                            {{product.CATEGORIA_NOMBRE}}</option>
+                                                        {{#each listcategory}}
+                                                        <option value="{{CATEGORIA_ID}}">{{CATEGORIA_NOMBRE}}</option>
+                                                        {{/each}}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="form-label">Presentación:</label>
+                                                <div class="form-label">
+                                                    <select name="PRESENTACION_ID" class="form-control" required>
+                                                        <option value="{{product.PRESENTACION_ID}}">
+                                                            {{product.PRESENTACION_NOMBRE}}</option>
+                                                        {{#each listpresentation}}
+                                                        <option value="{{PRESENTACION_ID}}">{{PRESENTACION_NOMBRE}}
+                                                        </option>
+                                                        {{/each}}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="form-label">Unidad de Medida:</label>
+                                                <div class="form-label">
+                                                    <select name="MEDIDA_ID" class="form-control" required>
+                                                        <option value="{{product.MEDIDA_ID}}">
+                                                            {{product.MEDIDA_NOMBRE}}</option>
+                                                        {{#each listmeasure}}
+                                                        <option value="{{MEDIDA_ID}}">{{MEDIDA_NOMBRE}}
+                                                        </option>
+                                                        {{/each}}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="form-label">Peso Unitario:</label>
+                                                <input type="number" value="{{product.PRODUCTO_MEDIDA}}"
+                                                    name="PRODUCTO_MEDIDA" class="form-control" placeholder="Peso" maxlength="6" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                    required>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="form-label">Cantidad:</label>
+                                                <input type="number" value="{{product.PRODUCTO_CANTIDAD}}"
+                                                    name="PRODUCTO_CANTIDAD" class="form-control" placeholder="Stock" maxlength="6" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                    required>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="form-label">Precio Unitario:</label>
+                                                <input type="number" value="{{product.PRODUCTO_PRECIO}}"
+                                                    name="PRODUCTO_PRECIO" class="form-control" placeholder="Precio" maxlength="60" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                                    required>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                {{!-- <label class="form-label">Fecha Expiracion:</label>
+                                                <div class="form-label">
+                                                    <input class="form-control" value="{{product.PRODUCTO_FECHALIMITE}}"
+                                                        name="PRODUCTO_FECHALIMITE" type="date" id="validateTime"
+                                                        required>
+                                                </div> --}}
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Descripción:</label>
+                                                <textarea name="PRODUCTO_DESCRIPCION" rows="2" class="form-control"
+                                                    placeholder="Description"
+                                                    required>{{product.PRODUCTO_DESCRIPCION}}</textarea>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Oferta:</label>
+                                                <textarea name="OFERTA_DESCRIPCION" rows="2" class="form-control"
+                                                    placeholder="Description">{{product.OFERTA_DESCRIPCION}}</textarea>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Imagen Antigua:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Imagen Actual:</label>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <img src="{{product.PRODUCTO_URL}}" class="img-thumbnail" width="300px">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <input type="file" accept="image/*" name="SUBIR_IMAGEN"
+                                                    class="form-control" onchange="loadFile(event)">
+                                                <p></p>
+                                                <img id="output" class="img-thumbnail" width="300px" />
+                                            </div>
+
+                                            <div class="col-12 text-center">
+                                                <button class="btn btn-success">
+                                                    Guardar
+                                                </button>
+                                                <a href="/products" class="btn btn-danger">Cancelar</a>
+                                            </div>
+
+                                        </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="panel panel-default">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="panel-heading text-center">
+                            <h3>
+                                <div class="panel-title">Información</div>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="text-secondary">
+                        <h5 class="card-title">Categoria:</h5>
+                        {{#each category}}
+                        <p>
+                            <label for="">{{CATEGORIA_NOMBRE}}:</label> {{CATEGORIA_DESCRIPCION}}<br>
+                        </p>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var loadFile = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>

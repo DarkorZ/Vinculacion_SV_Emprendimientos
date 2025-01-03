@@ -1,0 +1,43 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card text-center">
+                <div class="card-body">
+                    {{#if detail}}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Comprador</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Tipo de Pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each detail}}
+                            <tr>
+                                <td>{{VENTA_FECHA}}</td>
+                                <td>{{PERSONA_NOMBRE}}</td>
+                                <td>{{PERSONA_TELEFONO}}</td>
+                                <td>{{DETALLE_NOMBREPRODUCTO}}</td>
+                                <td>{{DETALLE_CANTIDAD}}</td>
+                                <td>{{DETALLE_PRECIOTOTAL}}</td>
+                                <td>{{PAGO_NOMBRE}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    {{else}}
+                    <h3>Usted no tiene ventas realizadas</h3>
+                    <a href="/products" class="btn btn-primary m-4">
+                        Regresar
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-2 col-md-pull-5">
+            <div class="col-md-8">
+                <div class="thumbnail row text-center" style="min-height:260px;">
+                    <img src="{{profile.PERSONA_URL}}" class="img-thumbnail" width="300px">
+                    <div class="mb-3">
+                    </div>
+                    <h4 class="panel-title"><i class="fal fa-user"></i> {{profile.PERSONA_NOMBRE}}</h4>
+                    <div class="mb-3">
+                    </div>
+                    <div class="panel-body">
+                        <i class="far fa-envelope"> {{profile.PERSONA_EMAIL}}</i>
+                    </div>
+                    <div class="mb-3">
+                    </div>
+                    <div class="panel-body">
+                        <i class="fal fa-phone"> {{profile.PERSONA_TELEFONO}}</i>
+                    </div>
+                    <div class="mb-3">
+                    </div>
+                    <div class="panel-body">
+                        <i class="fal fa-map-marked-alt"> {{profile.PARROQUIA}}</i>
+                    </div>
+                    <div class="mb-3">
+                    </div>
+                    <div class="d-grid gap-3">
+                        <a href="/products/user" class="btn btn-outline-primary">Actualizar</a>
+                        <a href="/shop" class="btn btn-outline-success"><i class="fal fa-cart-arrow-down">Comprar</i>
+                        </a>
+                        <a href="/products/add" class="btn btn-outline-warning"><i
+                                class="fal fa-shopping-basket">Vender</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-10 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            {{#if offer}}
+                            <div class="text-center card-title">
+                                <h5>Productos en oferta</h5>
+                            </div>
+
+                            {{#each offer}}
+                            <div class="col-md-3">
+                                <div class="card mb-4 shadow-sm">
+                                    <div class="card">
+                                        
+                                            <img class="card-img-top" src="{{PRODUCTO_URL}}" width="90px"
+                                                height="150px">
+                                            <h5 class="card-title">{{PRODUCTO_NOMBRE}}</h5>
+                                            <p class="card-text">Descripcion:</p>
+                                            <p><textarea rows="2" class="form-control"
+                                                    readonly>{{PRODUCTO_DESCRIPCION}}</textarea></p>
+                                            <p><textarea rows="2" class="form-control"
+                                                    readonly>{{OFERTA_DESCRIPCION}}</textarea></p>
+                                            <p class="card-text">Categoria: {{CATEGORIA_NOMBRE}}</p>
+                                            <p class="card-text">Presentacion: {{PRESENTACION_NOMBRE}}</p>
+                                            <p class="card-text">Cantidad: {{PRODUCTO_CANTIDAD}}</p>
+                                            <p class="card-text">Precio: {{PRODUCTO_PRECIO}}</p>
+                                            <p class="card-text">Medida: {{MEDIDA_NOMBRE}}</p>
+                                            <p class="card-text">Peso: {{PRODUCTO_MEDIDA}}</p>
+                                            <div class="d-grid gap-3">
+                                                <a href="/products/edit/{{PRODUCTO_ID}}"
+                                                    class="btn btn-primary rounded-pill">Actualizar</a>
+                                                <a href="/products/deleteoffer/{{PRODUCTO_ID}}"
+                                                    class="btn btn-warning rounded-pill">Eliminar Oferta</a>
+                                                <a href="/products/delete/{{PRODUCTO_ID}}"
+                                                    class="btn btn-danger rounded-pill">Eliminar</a>
+                                            </div>
+                                        
+                                        <div class="card-footer">
+                                            <p class="card-text">Caduca: {{timeago PRODUCTO_FECHALIMITE}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                            </div>
+                            {{/if}}
+
+                            {{#each products}}
+                            <div class="col-md-3">
+                                <div class="card mb-4 shadow-sm">
+                                    <div class="card">
+                                        
+                                            <img src="{{PRODUCTO_URL}}" class="card-img-top" width="90px"
+                                                height="150px">
+                                            <h5 class="card-title">{{PRODUCTO_NOMBRE}}</h5>
+                                            <p class="card-text">Descripcion:</p>
+                                            <p><textarea rows="2" class="form-control"
+                                                    readonly>{{PRODUCTO_DESCRIPCION}}</textarea></p>
+                                            <p class="card-text">Categoria: {{CATEGORIA_NOMBRE}}</p>
+                                            <p class="card-text">Presentacion: {{PRESENTACION_NOMBRE}}</p>
+                                            <p class="card-text">Cantidad: {{PRODUCTO_CANTIDAD}}</p>
+                                            <p class="card-text">Precio: {{PRODUCTO_PRECIO}}</p>
+                                            <p class="card-text">Medida: {{MEDIDA_NOMBRE}}</p>
+                                            <p class="card-text">Peso: {{PRODUCTO_MEDIDA}}</p>
+                                            <div class="d-grid gap-3">
+                                                <a href="/products/edit/{{PRODUCTO_ID}}"
+                                                    class="btn btn-primary rounded-pill">Actualizar</a>
+                                                <a href="/products/delete/{{PRODUCTO_ID}}"
+                                                    class="btn btn-danger rounded-pill">Eliminar</a>
+                                            </div>
+                                        
+                                        <div class="card-footer">
+                                            <p class="card-text">Caduca: {{timeago PRODUCTO_FECHALIMITE}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{else}}
+                            <div class="col-md-4 mx-auto">
+                                <div class="card text-center">
+                                    <p>No hay productos agregados</p>
+                                    <a href="/products/add">Agregue Uno!</a>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
