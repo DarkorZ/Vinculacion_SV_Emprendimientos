@@ -40,10 +40,15 @@ router.post('/signin', isNotLoggedIn, passport.authenticate('local.signin', {
     failureRedirect: '/signin',
     failureFlash: true
 }));
-
+//Anadimos un return vacio para que funcione el logout AGREGADO POR MI 
 router.get('/logout', isLoggedIn, (req, res) => {
-    req.logOut();
-    res.redirect('/')
+    req.logOut((err) => {
+        if(err){
+            return next(err);
+        }
+        res.redirect('/')
+    }); 
+    
 });
 
 module.exports = router;
