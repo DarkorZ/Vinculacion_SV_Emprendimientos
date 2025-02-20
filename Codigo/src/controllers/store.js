@@ -229,9 +229,19 @@ module.exports = {
             await pool.query('INSERT INTO VENTA set ?', [newSell]);
 
             const row = await pool.query('SELECT MAX(VENTA_ID) AS ID FROM VENTA, PERSONA WHERE VENTA.PERSONA_ID = PERSONA.PERSONA_ID AND PERSONA.PERSONA_ID = ?', [req.user.PERSONA_ID]);
-            const lastId = row[0];
-            const lastSell = lastId.id;
-
+            console.log('row:', row);
+            let lastSell; // definiimos el lastsell fuera del bloque IF para que este disoible en toda la funcion
+            if (row.length > 0) {
+                const lastId = row[0];
+                lastSell = lastId.ID; //YA QUE AQUI SE DEFINIA DE MALA mANERA
+                console.log('lastSell:', lastSell);
+            } else {
+                console.error('No se encontró un VENTA_ID para el usuario:', req.user.PERSONA_ID);
+            }
+            //const lastId = row[0];
+            //const lastSell = lastId.id; el problema por el cual el venta_id pasaba undefined
+            console.log('lastSellNUEVO:', lastSell);
+            if(lastSell){ //Andiadimos una sentencia if para que ejecute el detailSell solamente si tenemos un lastSell
             for (let i of products) {
                 const detailSell = {
                     VENTA_ID: lastSell,
@@ -243,12 +253,17 @@ module.exports = {
                     DETALLE_PRECIOTOTAL: i.PRODUCTO_PRECIO,
                     DETALLE_PRODUCTOR: i.PERSONA_ID,
                     DETALLE_DIRECCION: i.DIRECCION
+                    
                 }
 
                 console.log(detailSell);
 
                 await pool.query('INSERT INTO DETALLE_VENTA SET ?', [detailSell]);
             }
+
+        } else {
+            console.error('No se obtivo un VENTA_ID valido');
+        }
 
             // Aplicar un update al producto comprado, restando su stock
             for (let i of products) {
